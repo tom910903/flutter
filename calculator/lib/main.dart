@@ -48,8 +48,27 @@ class ResultWidget extends StatelessWidget {
 }
 
 class KeyWidget extends StatelessWidget {
+  List<String> keys = ["AC","+/-","%","/","7","8","9","*","4","5","6","-","1","2","3","+","0",".","="];
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GridView.count(
+        crossAxisCount: 4,
+        children: List.generate(20, (index){
+          return Center(
+              child: Text("a",
+                  style: TextStyle(
+                      fontSize: 40,
+                      color: Colors.white
+                  )
+              )
+          );
+        }
+        )
+    );
   }
+}
+
+
+class Key{
+
 }
