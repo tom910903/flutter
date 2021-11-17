@@ -1,5 +1,6 @@
-//18
+//21
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,28 +23,24 @@ class MyPage extends StatelessWidget {
           title: Text('AppBar'),
           centerTitle: true,
         ),
-        body: MySnackbar());
+        body: Center(
+          child: FlatButton(
+            onPressed: () {
+              flutterToast();
+            },
+            child: Text("Toast"),
+            color: Colors.blue,
+          ),
+        ));
   }
 }
 
-class MySnackbar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: RaisedButton(
-        child: Text('show me'),
-        onPressed: () {
-          Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text(
-              'hello',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.teal,
-            duration: Duration(milliseconds: 1000),
-          ));
-        },
-      ),
-    );
-  }
+void flutterToast() {
+  Fluttertoast.showToast(
+      msg: "msg",
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.red,
+      fontSize: 20,
+      textColor: Colors.white,
+      toastLength: Toast.LENGTH_SHORT);
 }
