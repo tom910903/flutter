@@ -21,9 +21,9 @@ class CalculatorPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+        padding: const EdgeInsets.all(5),
         child: Column(
-          children: [ResultWidget(), KeyWidget()],
+          children: [ResultWidget(), KeyBoardWidget()],
         ),
       ),
     );
@@ -33,14 +33,17 @@ class CalculatorPage extends StatelessWidget {
 class ResultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Expanded(
-      flex: 3,
-      child: Text("0", style: TextStyle(fontSize: 40, color: Colors.white)),
+    return Expanded(
+        flex: 3,
+        child: Container(
+          alignment: Alignment.bottomRight,
+          child: Text("0", style: TextStyle(fontSize: 40, color: Colors.white,)),
+        )
     );
   }
 }
 
-class KeyWidget extends StatelessWidget {
+class KeyBoardWidget extends StatelessWidget {
   List<String> keys = [
     "AC",
     "+/-",
@@ -66,70 +69,73 @@ class KeyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         flex: 7,
-        child: Column(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  Key(
-                      text: "AC",
-                      isnumber: false,
-                      bgColor: const Color(0xFFBDBDBD),
-                      textColor: Colors.black),
-                  Key(
-                      text: "+/-",
-                      isnumber: false,
-                      bgColor: const Color(0xFFBDBDBD),
-                      textColor: Colors.black),
-                  Key(
-                      text: "%",
-                      isnumber: false,
-                      bgColor: const Color(0xFFBDBDBD),
-                      textColor: Colors.black),
-                  Key(text: "/", isnumber: false, bgColor: Colors.amber),
-                ],
+        child: Padding(
+          padding: const EdgeInsets.only(left: 5, right: 5),
+          child: Column(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Key(
+                        text: "AC",
+                        isnumber: false,
+                        bgColor: const Color(0xFFBDBDBD),
+                        textColor: Colors.black),
+                    Key(
+                        text: "+/-",
+                        isnumber: false,
+                        bgColor: const Color(0xFFBDBDBD),
+                        textColor: Colors.black),
+                    Key(
+                        text: "%",
+                        isnumber: false,
+                        bgColor: const Color(0xFFBDBDBD),
+                        textColor: Colors.black),
+                    Key(text: "/", isnumber: false, bgColor: Colors.amber),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-                child: Row(
-                  children: [
-                    Key(text: "7"),
-                    Key(text: "8"),
-                    Key(text: "9"),
-                    Key(text: "*", isnumber: false, bgColor: Colors.amber),
-                  ],
-                )
-            ),
-            Expanded(
-                child: Row(
-                  children: [
-                    Key(text: "4"),
-                    Key(text: "5"),
-                    Key(text: "6"),
-                    Key(text: "-", isnumber: false, bgColor: Colors.amber),
-                  ],
-                )
-            ),
-            Expanded(
-                child: Row(
-                  children: [
-                    Key(text: "1"),
-                    Key(text: "2"),
-                    Key(text: "3"),
-                    Key(text: "+", isnumber: false, bgColor: Colors.amber),
-                  ],
-                )
-            ),
-            Expanded(
-                child: Row(
-                  children: [
-                    Key(text: "0", flex: 2,),
-                    Key(text: ".", isnumber: false),
-                    Key(text: "=", isnumber: false),
-                  ],
-                )
-            )
-          ],
+              Expanded(
+                  child:  Row(
+                    children: [
+                      Key(text: "7"),
+                      Key(text: "8"),
+                      Key(text: "9"),
+                      Key(text: "*", isnumber: false, bgColor: Colors.amber),
+                    ],
+                  )
+              ),
+              Expanded(
+                  child: Row(
+                    children: [
+                      Key(text: "4"),
+                      Key(text: "5"),
+                      Key(text: "6"),
+                      Key(text: "-", isnumber: false, bgColor: Colors.amber),
+                    ],
+                  )
+              ),
+              Expanded(
+                  child: Row(
+                    children: [
+                      Key(text: "1"),
+                      Key(text: "2"),
+                      Key(text: "3"),
+                      Key(text: "+", isnumber: false, bgColor: Colors.amber),
+                    ],
+                  )
+              ),
+              Expanded(
+                  child: Row(
+                    children: [
+                      Key(text: "0", flex: 2,),
+                      Key(text: ".", isnumber: false),
+                      Key(text: "=", isnumber: false),
+                    ],
+                  )
+              )
+            ],
+          ),
         ));
   }
 }
@@ -140,29 +146,47 @@ class Key extends StatelessWidget {
         Color bgColor = const Color(0xFF303030),
         Color textColor = Colors.white,
         bool isnumber = true,
-      int flex = 1})
+        int flex = 1})
       : _text = text,
         _backgroundColor = bgColor,
         _textColor = textColor,
         _isNumber = isnumber,
-  _flex = flex;
+        _flex = flex;
 
-  String _text;
-  Color _textColor;
-  Color _backgroundColor;
-  bool _isNumber;
-  int _flex;
+  final String _text;
+  final Color _textColor;
+  final Color _backgroundColor;
+  final bool _isNumber;
+  final int _flex;
 
   Widget build(BuildContext context) {
     return Expanded(
-      flex: _flex,
-      child: TextButton(
-          onPressed: () {},
-          child: Text(_text),
-          style: TextButton.styleFrom(
-              backgroundColor: _backgroundColor,
-              primary: _textColor,
-              textStyle: TextStyle(fontSize: 40))),
+        flex: _flex,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(7, 5, 7, 5),
+          child: SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: TextButton(
+              onPressed: () {
+                if(_isNumber){
+
+                }else{
+
+                }
+              },
+              child: Text(_text),
+              style: TextButton.styleFrom(
+                backgroundColor: _backgroundColor,
+                primary: _textColor,
+                textStyle: const TextStyle(fontSize: 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+            ),
+          ),
+        )
     );
   }
 }
