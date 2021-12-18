@@ -1,4 +1,6 @@
+import 'package:calculator/Model/CalculatorModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 class ResultWidget extends StatelessWidget {
   @override
@@ -6,7 +8,7 @@ class ResultWidget extends StatelessWidget {
     return Expanded(
         child: Container(
           alignment: Alignment.bottomRight,
-          child: Text("0", style: TextStyle(fontSize: 40, color: Colors.white,)),
+          child: Text((context.watch<CalculatorModel>().getValue()), style: TextStyle(fontSize: 40, color: Colors.white,)),
         )
     );
   }

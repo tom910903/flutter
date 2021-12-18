@@ -1,4 +1,6 @@
+import 'package:calculator/Model/CalculatorModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 class KeyWidget extends StatelessWidget {
 
@@ -31,9 +33,9 @@ class KeyWidget extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 if(_isNumber){
-
+                  context.read<CalculatorModel>().setValue(_text);
                 }else{
-
+                  context.read<CalculatorModel>().setOperation(_text);
                 }
               },
               child: Text(_text),

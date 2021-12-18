@@ -1,16 +1,22 @@
+import 'package:calculator/Model/CalculatorModel.dart';
 import 'package:flutter/material.dart';
-import 'package:calculator/screen/keypad.dart';
-import 'package:calculator/screen/result.dart';
+import 'package:calculator/View/keypad.dart';
+import 'package:calculator/View/result.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(CalculatorApp());
 
 class CalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "calculator",
-      home: CalculatorPage(),
+    return ChangeNotifierProvider(
+      create: (_) => CalculatorModel(),
+      // builder: (_)=> CalculatorModel(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "calculator",
+        home: CalculatorPage(),
+      ),
     );
   }
 }
