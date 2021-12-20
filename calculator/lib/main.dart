@@ -4,19 +4,20 @@ import 'package:calculator/View/keypad.dart';
 import 'package:calculator/View/result.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(CalculatorApp());
+void main() => runApp(
+    Provider(
+      create: (_) => CalculatorModel(),
+      child: CalculatorApp(),
+    )
+);
 
 class CalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CalculatorModel(),
-      // builder: (_)=> CalculatorModel(),
-      child: MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "calculator",
-        home: CalculatorPage(),
-      ),
+        home: CalculatorPage()
     );
   }
 }
@@ -24,12 +25,15 @@ class CalculatorApp extends StatelessWidget {
 class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.all(5),
-        child: Column(
-          children: [ResultWidget(), KeyPadWidget()],
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => CalculatorModel(),
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Padding(
+          padding: const EdgeInsets.all(5),
+          child: Column(
+            children: [ResultWidget(), KeyPadWidget()],
+          ),
         ),
       ),
     );
