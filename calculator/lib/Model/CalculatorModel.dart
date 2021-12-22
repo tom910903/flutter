@@ -5,26 +5,34 @@ class CalculatorModel with ChangeNotifier{
   String _value = "0";
   String _operation = "";
   double _prevValue = 0;
-  bool _dot = false;
 
   String get Value=> _value;
   String get peration => _operation;
   double get PrevValue => _prevValue;
 
   setValue(String value) {
-    if(_value == "0"){
-      _value = value;
-    }else {
+    if(value == '.' && _value.contains('.')) return;
+    if(value == '.') {
       _value += value;
+    }else {
+      if (_value == "0") {
+        _value = value;
+      } else {
+        _value += value;
+      }
     }
-    notifyListeners();
+      notifyListeners();
   }
   setOperation(String value) {
     if(value == "/" || value == "*" || value == "-" || value == "+"){
       _operation = value;
       _prevValue = double.parse(_value);
     }else if(value == "AC"){
-
+      if(_value == "0"){
+        reset();
+      }else{
+        init();
+      }
     }else if(value == "+/-"){
 
     }else if(value == "%"){

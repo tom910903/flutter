@@ -89,7 +89,7 @@ class KeyPadWidget extends StatelessWidget {
                   child: Row(
                     children: [
                       KeyWidget(text: "0", flex: 2,),
-                      KeyWidget(text: ".", isnumber: false),
+                      KeyWidget(text: ".",),
                       KeyWidget(text: "=", isnumber: false),
                     ],
                   )
