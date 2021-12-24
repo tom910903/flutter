@@ -33,7 +33,7 @@ class KeyWidget extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 if(_isNumber){
-                  context.read<CalculatorModel>().setValue(_text);
+                  context.read<CalculatorModel>().setUnformattedValue(_text);
                 }else{
                   context.read<CalculatorModel>().setOperation(_text);
                 }

@@ -3,30 +3,38 @@ import 'package:flutter/material.dart';
 class CalculatorModel with ChangeNotifier{
 
   String _value = "0";
+  String _unformattedValue = "0";
   String _operation = "";
   double _prevValue = 0;
 
   String get Value=> _value;
+  String get UnformattedValue=> _unformattedValue;
   String get peration => _operation;
   double get PrevValue => _prevValue;
 
   setValue(String value) {
-    if(value == '.' && _value.contains('.')) return;
+    _value = reslutFormat(value);
+    notifyListeners();
+  }
+
+  setUnformattedValue(String value) {
+    if(value == '.' && _unformattedValue.contains('.')) return;
     if(value == '.') {
-      _value += value;
+      _unformattedValue += value;
     }else {
-      if (_value == "0") {
-        _value = value;
+      if (_unformattedValue == "0") {
+        _unformattedValue = value;
       } else {
-        _value += value;
+        _unformattedValue += value;
       }
     }
-      notifyListeners();
+    setValue(_unformattedValue);
   }
   setOperation(String value) {
     if(value == "/" || value == "*" || value == "-" || value == "+"){
       _operation = value;
       _prevValue = double.parse(_value);
+      _unformattedValue = "0";
     }else if(value == "AC"){
       if(_value == "0"){
         reset();
@@ -62,14 +70,26 @@ class CalculatorModel with ChangeNotifier{
   String calc(){
     String result = "0";
     if(_operation == "+"){
-      result = (_prevValue + double.parse(_value)).toString();
+      result = reslutFormat((_prevValue + double.parse(_value)).toString());
     }else if (_operation == "-"){
-      result = (_prevValue - double.parse(_value)).toString();
+      result = reslutFormat((_prevValue - double.parse(_value)).toString());
     }else if (_operation == "/"){
-      result = (_prevValue / double.parse(_value)).toString();
+      result = reslutFormat((_prevValue / double.parse(_value)).toString());
     }else if (_operation == "*"){
-      result = (_prevValue * double.parse(_value)).toString();
+      result = reslutFormat((_prevValue * double.parse(_value)).toString());
     }
+    return result;
+  }
+
+  String reslutFormat(String value){
+    String result = "";
+
+    if(double.parse(value) - int.parse(value).toDouble() != 0){
+      result = value.toString();
+    }else{
+      result = int.parse(value).toString();
+    }
+
     return result;
   }
 }
