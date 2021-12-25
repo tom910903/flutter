@@ -14,7 +14,6 @@ class CalculatorModel with ChangeNotifier{
 
   setValue(String value) {
     _value = reslutFormat(value);
-    notifyListeners();
   }
 
   setUnformattedValue(String value) {
@@ -22,19 +21,22 @@ class CalculatorModel with ChangeNotifier{
     if(value == '.') {
       _unformattedValue += value;
     }else {
-      if (_unformattedValue == "0") {
+      if (_value == "0") {
         _unformattedValue = value;
       } else {
         _unformattedValue += value;
       }
+      setValue(_unformattedValue);
     }
-    setValue(_unformattedValue);
+
+    notifyListeners();
   }
+
   setOperation(String value) {
     if(value == "/" || value == "*" || value == "-" || value == "+"){
       _operation = value;
       _prevValue = double.parse(_value);
-      _unformattedValue = "0";
+      _value = "0";
     }else if(value == "AC"){
       if(_value == "0"){
         reset();
@@ -46,7 +48,8 @@ class CalculatorModel with ChangeNotifier{
     }else if(value == "%"){
 
     }else{
-      _value = calc();
+      _unformattedValue = calc();
+      _value = "0";
     }
     notifyListeners();
   }
@@ -57,6 +60,7 @@ class CalculatorModel with ChangeNotifier{
 
   reset(){
     _value = "0";
+    _unformattedValue = "0";
     notifyListeners();
   }
 
@@ -64,6 +68,7 @@ class CalculatorModel with ChangeNotifier{
     _value = "0";
     _operation = "";
     _prevValue = 0;
+    _unformattedValue = "0";
     notifyListeners();
   }
 
@@ -84,12 +89,32 @@ class CalculatorModel with ChangeNotifier{
   String reslutFormat(String value){
     String result = "";
 
-    if(double.parse(value) - int.parse(value).toDouble() != 0){
-      result = value.toString();
+    if(isInt(value)){
+      result = double.parse(value).toInt().toString();
     }else{
-      result = int.parse(value).toString();
+      result = value.toString();
     }
 
     return result;
   }
+}
+
+bool isInt(String value) {
+  if(value == null) {
+    return false;
+  }
+
+  List<String> str = value.split(".");
+
+  if(str.length == 1){
+    return true;
+  }
+
+  int? parseNum = int.tryParse(str[1]);
+
+  if(parseNum == null){
+    return false;
+  }
+
+  return parseNum == 0;
 }

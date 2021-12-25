@@ -8,7 +8,7 @@ class ResultWidget extends StatelessWidget {
     return Expanded(
         child: Container(
           alignment: Alignment.bottomRight,
-          child: Text(context.watch<CalculatorModel>().Value, style: TextStyle(fontSize: 40, color: Colors.white,)),
+          child: Text(context.watch<CalculatorModel>().UnformattedValue, style: TextStyle(fontSize: 40, color: Colors.white,)),
         )
     );
   }
