@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:to_do/screen/main_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -94,7 +93,14 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: 50,
                 child: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context){
+                          return MainScreen();
+                        })
+                    );
+                  },
                   child: Text("Log in",
                     style: TextStyle(
                         color: Colors.white
