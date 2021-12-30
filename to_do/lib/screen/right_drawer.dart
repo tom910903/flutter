@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do/screen/settings_screen.dart';
 
 class RightDrawer extends StatelessWidget {
 
@@ -107,7 +108,12 @@ class RightDrawer extends StatelessWidget {
               ),
               child: IconButton(
                   onPressed: (){
-                    print("settings");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context){
+                          return SettingsScreen();
+                        })
+                    );
                   },
                   icon: Icon(Icons.settings,size: 50,)
               ),
