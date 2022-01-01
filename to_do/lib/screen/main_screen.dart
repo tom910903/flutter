@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:to_do/screen/title_bar.dart';
 import 'right_drawer.dart';
 
 class MainScreen extends StatelessWidget {
@@ -9,20 +10,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: TextButton(
-            onPressed:(){},
-            child:
-            Text(DateFormat('E MMM dd yyyy').format(DateTime.now()).toString(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20
-              ),
-            )
-        ),
-      ),
+      appBar: TitleBar(),
       endDrawer: RightDrawer(),
       endDrawerEnableOpenDragGesture: true,
       body: Padding(
