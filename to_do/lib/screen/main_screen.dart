@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:to_do/screen/title_bar.dart';
-import 'right_drawer.dart';
+import 'package:to_do/component/title_bar.dart';
+import '../component/right_drawer.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _isAddToDo = false;
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +76,98 @@ class MainScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-
-        },
-        backgroundColor: Colors.white,
-        child: const Icon(Icons.add, size: 50, color: Colors.blue,),
+      floatingActionButton: Visibility(
+        visible: !_isAddToDo,
+        child: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              _isAddToDo = true;
+            });
+          },
+          backgroundColor: Colors.white,
+          child: const Icon(Icons.add, size: 50, color: Colors.blue,),
+        ),
+      ),
+      bottomSheet: Visibility(
+        visible: _isAddToDo,
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.15,
+          child: Column(
+            children: [
+              TextFormField(
+                autofocus: true,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _isAddToDo = false;
+                        });
+                      },
+                      icon:Icon(Icons.arrow_circle_up,
+                        color: Colors.grey,
+                      )
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(35.0),
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                    BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(35.0),
+                    ),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                  hintText: 'Add To Do',
+                  hintStyle: TextStyle(
+                      fontSize: 20, color: Colors.grey),
+                  contentPadding: EdgeInsets.all(10),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: IconButton(
+                        onPressed: (){},
+                        icon: Icon(Icons.calendar_today)
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                        onPressed: (){},
+                        icon: Icon(Icons.folder_open)
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                        onPressed: (){},
+                        icon: Icon(Icons.auto_awesome_motion_rounded )
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                        onPressed: (){},
+                        icon: Icon(Icons.star_outline_rounded)
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                        onPressed: (){},
+                        icon: Icon(Icons.edit_rounded)
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
