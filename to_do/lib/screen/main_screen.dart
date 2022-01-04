@@ -21,7 +21,6 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    todoBloc.dispose();
   }
 
   @override
@@ -88,20 +87,16 @@ class _MainScreenState extends State<MainScreen> {
                       },
                       child: ListTile(
                         onTap: () {
-                          // Get.toNamed("/memos/${item.pk}");
                         },
-                        leading: Text(
-                          item.pk.toString(),
-                        ),
-                        title: Text(item.todo as String),
-                        subtitle: Text(item.type),
-                        trailing: Checkbox(
+                        leading: Checkbox(
                           onChanged: (bool? value) {
                             item.toggleComplete();
                             todoBloc.updateToDo(item);
                           },
                           value: item.complete == 1 ? true : false,
                         ),
+                        title: Text(item.todo as String),
+                        subtitle: Text(item.type),
                       ),
                     );
                   },
