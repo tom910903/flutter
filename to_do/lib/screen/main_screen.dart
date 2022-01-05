@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import 'package:to_do/component/title_bar.dart';
-import '../component/right_drawer.dart';
-import 'package:to_do/database/database_helper.dart';
+import 'package:to_do/component/right_drawer.dart';
 import 'package:to_do/model/to_do_model.dart';
 import 'package:to_do/database/to_do_bloc.dart';
+import 'package:to_do/screen/to_do_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -27,7 +27,6 @@ class _MainScreenState extends State<MainScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
   }
 
   @override
@@ -40,125 +39,46 @@ class _MainScreenState extends State<MainScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-          Expanded(
-          flex: 4,
-          child: PageView(
-            children: [
-              GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: 1.8,
-                children: List.generate(4, (index) {
-                  return OutlinedButton(
-                      onPressed: (){
-                        _scaffoldKey.currentState!.openEndDrawer();
-                      },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.add_a_photo_sharp),
-                          Text("data")
-                        ],
-                      )
-                  );
-                }),
-
-              )
-              // Text("page2",),
-              // Text("page3",),
-            ],
-          ),
-        ),
-        Expanded(
-          flex: 6,
-          child:
-          StreamBuilder(
-              stream: todoBloc.ToDos,
-              builder: (BuildContext context, AsyncSnapshot<List<ToDoModel>> snapshot) {
-                return snapshot.hasData
-                    ? ListView.builder(
-                  itemCount: snapshot.data?.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    ToDoModel item = snapshot.data![index];
-                    return Dismissible(
-                      key: UniqueKey(),
-                      onDismissed: (direction) {
-                        todoBloc.deleteToDo(item.pk as int);
-                      },
-                      child: ListTile(
-                        onTap: () {
+            Expanded(
+              flex: 4,
+              child: PageView(
+                children: [
+                  GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.8,
+                    children: List.generate(4, (index) {
+                      return GestureDetector(
+                        onTap: (){
+                          // _scaffoldKey.currentState!.openEndDrawer();
                         },
-                        leading: Checkbox(
-                          onChanged: (bool? value) {
-                            item.toggleComplete();
-                            todoBloc.updateToDo(item);
-                          },
-                          value: item.complete == 1 ? true : false,
+                        child: Card(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.add_a_photo_sharp),
+                                Text("data")
+                              ],
+                            )
                         ),
-                        title: Text(item.todo as String),
-                        subtitle: Text(item.type),
-                      ),
-                    );
-                  },
-                )
-                    : Center(
-                  child: Center(
-                    child: Text('아무것도 엄써 ㅇㅅㅇ!'),
-                  ),
-                );
-              }
-          ),
-        ),
-
-          // FutureBuilder(
-          //   future: DBHelper().getAllToDoModels(),
-          //   builder: (BuildContext context, AsyncSnapshot<List<ToDoModel>> snapshot) {
-          //
-          //     if(snapshot.hasData) {
-          //
-          //       return ListView.builder(
-          //         itemCount: snapshot.data!.length,
-          //         itemBuilder: (BuildContext context, int index) {
-          //
-          //           ToDoModel item = snapshot.data![index];
-          //
-          //           return Dismissible(
-          //             key: UniqueKey(),
-          //             onDismissed: (direction) {
-          //               DBHelper().deleteToDoModel(item.pk);
-          //               setState(() {});
-          //             },
-          //             child: Center(child: Text(item.title)),
-          //           );
-          //         },
-          //       );
-          //     }
-          //     else
-          //     {
-          //       return Center(child: CircularProgressIndicator(),);
-          //     }
-          //   },
-          // ),
-
-          // ListView.separated(
-          //   itemBuilder: (BuildContext context, int index) {
-          //     return Text('$index',
-          //       style: TextStyle(
-          //           fontSize: 20
-          //       ),
-          //     );
-          //   },
-          //   separatorBuilder: (BuildContext context, int index) => const Divider(),
-          //   itemCount: 20,
-          // ),
-          // ),
-          LinearPercentIndicator(
-            // width: 140.0,
-            lineHeight: 14.0,
-            percent: 0.5,
-            backgroundColor: Colors.grey,
-            progressColor: Colors.blue,
-          ),
+                      );
+                    }),
+                  )
+                  // Text("page2",),
+                  // Text("page3",),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 6,
+              child: ToDoScreen(),
+            ),
+            LinearPercentIndicator(
+              lineHeight: 14.0,
+              percent: 0.5,
+              backgroundColor: Colors.grey,
+              progressColor: Colors.blue,
+            ),
           ],
         ),
       ),
