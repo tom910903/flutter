@@ -4,13 +4,18 @@ import 'database_helper.dart';
 import 'package:to_do/model/to_do_model.dart';
 
 class ToDoBloc {
-  ToDoBloc() {
-    getToDos();
-  }
+
+  static final ToDoBloc _instance = ToDoBloc._internal();
+
+  factory ToDoBloc() => _instance;
 
   final _ToDosController = StreamController<List<ToDoModel>>.broadcast(); // [1]
 
   get ToDos => _ToDosController.stream;
+
+  ToDoBloc._internal(){
+    getToDos();
+  }
 
   dispose() {
     _ToDosController.close();
