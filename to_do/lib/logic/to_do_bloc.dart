@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'database_helper.dart';
+import '../database/database_helper.dart';
 import 'package:to_do/model/to_do_model.dart';
 
 class ToDoBloc {

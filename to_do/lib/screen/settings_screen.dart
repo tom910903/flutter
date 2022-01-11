@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do/screen/notice_list_screen.dart';
+import 'package:to_do/screen/user_support_screen.dart';
 
 enum SETTINGS{
   NOTICE,
@@ -77,7 +78,7 @@ class SettingsScreen extends StatelessWidget {
                         case SETTINGS.PAGE_DIAL:
                           return NoticeListScreen();
                         case SETTINGS.USER_SUPPORT:
-                          return NoticeListScreen();
+                          return UserSupportScreen();
                         case SETTINGS.BUSINESS_SUPPORT:
                           return NoticeListScreen();
                         case SETTINGS.PERSONAL_INFORMATION:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:to_do/model/to_do_model.dart';
-import 'package:to_do/database/to_do_bloc.dart';
+import 'package:to_do/logic/to_do_bloc.dart';
 
 class AddToDoTextField extends StatefulWidget {
 
