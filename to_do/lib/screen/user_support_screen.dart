@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:to_do/component/support_dialog.dart';
 
 class UserSupportScreen extends StatelessWidget {
   const UserSupportScreen({Key? key}) : super(key: key);
@@ -18,10 +20,19 @@ class UserSupportScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
+          showAnimatedDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              return SupportDialog();
+            },
+            animationType: DialogTransitionType.slideFromBottom,
+            curve: Curves.fastOutSlowIn,
+            duration: Duration(milliseconds: 500),
+          );
         },
         backgroundColor: Colors.white,
-        child: const Icon(Icons.add, size: 50, color: Colors.blue,),
+        child: const Icon(Icons.add, size: 50, color:  Colors.blue,),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
