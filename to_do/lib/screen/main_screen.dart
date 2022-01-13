@@ -30,8 +30,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return
-      KeyboardDismissOnTap(
+    return KeyboardDismissOnTap(
       child: Scaffold(
         appBar: TitleBar(),
         endDrawer: RightDrawer(),

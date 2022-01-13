@@ -8,10 +8,11 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(50,30,50,30),
+        padding: const EdgeInsets.fromLTRB(50,80,50,30),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SizedBox(
                 width: 200,

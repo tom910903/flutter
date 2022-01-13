@@ -40,7 +40,7 @@ class _AddToDoTextFieldState extends State<AddToDoTextField> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: isAddToDo,
-      child: SizedBox(
+      child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.15,
         child: Column(
@@ -84,37 +84,27 @@ class _AddToDoTextFieldState extends State<AddToDoTextField> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.calendar_today)
-                  ),
+                IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.calendar_today)
                 ),
-                Expanded(
-                  child: IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.folder_open)
-                  ),
+                IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.folder_open)
                 ),
-                Expanded(
-                  child: IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.auto_awesome_motion_rounded )
-                  ),
+                IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.auto_awesome_motion_rounded )
                 ),
-                Expanded(
-                  child: IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.star_outline_rounded)
-                  ),
+                IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.star_outline_rounded)
                 ),
-                Expanded(
-                  child: IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.edit_rounded)
-                  ),
+                IconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.edit_rounded)
                 ),
               ],
             ),
