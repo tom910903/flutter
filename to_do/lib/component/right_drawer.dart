@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:to_do/screen/settings_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RightDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.5,
+      width: 540.w,
+      // MediaQuery.of(context).size.width * 0.5,
       child: Drawer(
         child: Column(
           children: [

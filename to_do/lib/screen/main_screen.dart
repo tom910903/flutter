@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:to_do/component/title_bar.dart';
 import 'package:to_do/component/right_drawer.dart';
 import 'package:to_do/screen/to_do_screen.dart';
 import 'package:to_do/component/add_to_do_text_field.dart';
+import 'package:horizontal_card_pager/horizontal_card_pager.dart';
+import 'package:horizontal_card_pager/card_item.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -30,47 +33,49 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<CardItem> items = [
+      IconTitleCardItem(
+        text: "Alarm",
+        iconData: Icons.access_alarms,
+      ),
+      IconTitleCardItem(
+        text: "Add",
+        iconData: Icons.add,
+      ),
+      IconTitleCardItem(
+        text: "Call",
+        iconData: Icons.add_call,
+      ),
+      IconTitleCardItem(
+        text: "WiFi",
+        iconData: Icons.wifi,
+      ),
+      IconTitleCardItem(
+        text: "File",
+        iconData: Icons.attach_file,
+      ),
+      IconTitleCardItem(
+        text: "Air Play",
+        iconData: Icons.airplay,
+      ),
+    ];
+
     return KeyboardDismissOnTap(
       child: Scaffold(
         appBar: TitleBar(),
         endDrawer: RightDrawer(),
         endDrawerEnableOpenDragGesture: true,
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.w),
           child: Column(
             children: [
-              Expanded(
-                flex: 4,
-                child: PageView(
-                  children: [
-                    GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.8,
-                      children: List.generate(4, (index) {
-                        return GestureDetector(
-                          onTap: (){
-                            // _scaffoldKey.currentState!.openEndDrawer();
-                          },
-                          child: Card(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.add_a_photo_sharp),
-                                  Text("data")
-                                ],
-                              )
-                          ),
-                        );
-                      }),
-                    )
-                    // Text("page2",),
-                    // Text("page3",),
-                  ],
-                ),
+              HorizontalCardPager(
+                initialPage: 0,
+                onPageChanged: (page) => print("page : $page"),
+                onSelectedItem: (page) => print("selected : $page"),
+                items: items,
               ),
               Expanded(
-                flex: 6,
                 child: ToDoScreen(),
               ),
               LinearPercentIndicator(
