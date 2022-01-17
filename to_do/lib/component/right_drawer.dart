@@ -7,8 +7,7 @@ class RightDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 540.w,
-      // MediaQuery.of(context).size.width * 0.5,
+      width: 180.w,
       child: Drawer(
         child: Column(
           children: [
