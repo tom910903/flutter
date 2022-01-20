@@ -3,6 +3,7 @@ import 'package:to_do/screen/notice_list_screen.dart';
 import 'package:to_do/screen/user_support_screen.dart';
 import 'package:to_do/screen/business_support_screen.dart';
 import 'package:to_do/screen/theme_screen.dart';
+import 'package:to_do/screen/page_dial_screen.dart';
 
 enum SETTINGS{
   NOTICE,
@@ -78,7 +79,7 @@ class SettingsScreen extends StatelessWidget {
                         case SETTINGS.THEME:
                           return ThemeScreen();
                         case SETTINGS.PAGE_DIAL:
-                          return NoticeListScreen();
+                          return PageDialScreen();
                         case SETTINGS.USER_SUPPORT:
                           return UserSupportScreen();
                         case SETTINGS.BUSINESS_SUPPORT:
