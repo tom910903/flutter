@@ -55,7 +55,6 @@ dev_dependencies:
   flutter_animated_dialog: ^2.0.1
   flutter_screenutil: ^5.0.4
   horizontal_card_pager: ^1.1.1
-  drag_and_drop_lists: ^0.3.2+2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

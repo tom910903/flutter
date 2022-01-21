@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:drag_and_drop_lists/drag_and_drop_list.dart';
+
 class PageModel{
   String _title = "";
   IconData _icon = Icons.alarm;
@@ -17,9 +17,14 @@ class PageModel{
   }
 }
 
-class PageDialScreen extends StatelessWidget {
+class PageDialScreen extends StatefulWidget {
 
-  List<PageModel> noticeModel= [
+  @override
+  State<PageDialScreen> createState() => _PageDialScreenState();
+}
+
+class _PageDialScreenState extends State<PageDialScreen> {
+  List<PageModel> _pageModel= [
     PageModel("Item1",Icons.ac_unit,"",),
     PageModel("Item2",Icons.theaters,"",),
     PageModel("Item3",Icons.shop,"",),
@@ -35,36 +40,37 @@ class PageDialScreen extends StatelessWidget {
         title: Text("Page Dial",
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Colors.white,
+            color: Colors.white,
           ),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              leading: Icon(noticeModel[index].ListIcon),
-                title: Text(noticeModel[index].Title,
-                  style: TextStyle(
-                     fontSize: 15.sp
+          padding: const EdgeInsets.all(15.0),
+          child: ReorderableListView(
+            children: [
+              for (final item in _pageModel)
+                ListTile(
+                  key: ValueKey(item),
+                  leading: Icon(item.ListIcon),
+                  title: Text(item.Title,
+                    style: TextStyle(
+                        fontSize: 15.sp
+                    ),
                   ),
-                ),
-              trailing: Icon(Icons.dehaze),
-              // onTap: (){
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(builder: (context){
-              //         // return ();
-              //       }
-              //       )
-              //   );
-              // },
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => const Divider(),
-          itemCount: noticeModel.length,
-        ),
+                  trailing: Icon(Icons.dehaze),
+                )
+            ],
+
+            onReorder: (int oldIndex, int newIndex) {
+              setState(() {
+                if (newIndex > oldIndex) {
+                  newIndex = newIndex - 1;
+                }
+                final item = _pageModel.removeAt(oldIndex);
+                _pageModel.insert(newIndex, item);
+              });
+            },
+          )
       ),
     );
   }
