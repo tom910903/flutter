@@ -4,6 +4,7 @@ import 'package:to_do/screen/user_support_screen.dart';
 import 'package:to_do/screen/business_support_screen.dart';
 import 'package:to_do/screen/theme_screen.dart';
 import 'package:to_do/screen/page_dial_screen.dart';
+import 'package:to_do/screen/personal_info_screen.dart';
 
 enum SETTINGS{
   NOTICE,
@@ -85,7 +86,7 @@ class SettingsScreen extends StatelessWidget {
                         case SETTINGS.BUSINESS_SUPPORT:
                           return BusinessSupportScreen();
                         case SETTINGS.PERSONAL_INFORMATION:
-                          return NoticeListScreen();
+                          return PersonalInfoScreen();
                         case SETTINGS.DEACTIVE_ACCOUNT:
                           return NoticeListScreen();
                         default:
