@@ -19,25 +19,22 @@ class ToDoScreen extends StatelessWidget {
               ToDoModel item = snapshot.data![index];
               return Slidable(
                 key: UniqueKey(),
-                // onDismissed: (direction) {
-                //   todoBloc.deleteToDo(item.pk as int);
-                // },
                 startActionPane: ActionPane(
                   motion: const DrawerMotion(),
                   children: [
-                    SlidableAction(
-                      onPressed: (BuildContext context) {  },
-                      backgroundColor: Color(0xFFFE4A49),
-                      foregroundColor: Colors.white,
-                      icon: Icons.delete,
-                      label: 'Delete',
-                    ),
                     SlidableAction(
                       onPressed: (BuildContext context) {  },
                       backgroundColor: Color(0xFF21B7CA),
                       foregroundColor: Colors.white,
                       icon: Icons.share,
                       label: 'Share',
+                    ),
+                    SlidableAction(
+                      onPressed: (BuildContext context) {  },
+                      backgroundColor: Color(0xFF0392CF),
+                      foregroundColor: Colors.white,
+                      icon: Icons.save,
+                      label: 'Save',
                     ),
                   ],
                 ),
@@ -52,11 +49,11 @@ class ToDoScreen extends StatelessWidget {
                       label: 'Archive',
                     ),
                     SlidableAction(
-                      onPressed: (BuildContext context) {  },
-                      backgroundColor: Color(0xFF0392CF),
+                      onPressed: (BuildContext context) { todoBloc.deleteToDo(item.pk as int); },
+                      backgroundColor: Color(0xFFFE4A49),
                       foregroundColor: Colors.white,
-                      icon: Icons.save,
-                      label: 'Save',
+                      icon: Icons.delete,
+                      label: 'Delete',
                     ),
                   ],
                 ),
