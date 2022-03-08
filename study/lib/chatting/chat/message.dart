@@ -23,14 +23,15 @@ class Messages extends StatelessWidget {
 
         final chatDocs = snapshot.data!.docs;
         return ListView.builder(
-          reverse: true,
-          itemCount: chatDocs.length,
+            reverse: true,
+            itemCount: chatDocs.length,
             itemBuilder: (context, index){
-          return ChatBubble(
-              chatDocs[index]['text'],
-              chatDocs[index]['userID'].toString() == user!.uid
-          );
-        });
+              return ChatBubbles(
+                chatDocs[index]['text'],
+                chatDocs[index]['userID'].toString() == user!.uid,
+                chatDocs[index]['userName'],
+              );
+            });
       },
     );
   }
