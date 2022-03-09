@@ -29,6 +29,43 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     }
   }
 
+  void showAlert(BuildContext context){
+    showDialog(
+        context: context,
+        builder: (context){
+          return Dialog(
+            backgroundColor: Colors.white,
+            child: Container(
+              padding: EdgeInsets.only(top: 10),
+              width: 150,
+              height: 300,
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.blue,
+                  ),
+                  SizedBox(height: 10,),
+                  OutlinedButton.icon(onPressed: (){},
+                      icon: Icon(Icons.image),
+                      label: Text('Add icon'),
+                  ),
+                  SizedBox(height: 80,),
+                  TextButton.icon(
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.close),
+                      label: Text('Close')
+                  )
+                ],
+              ),
+            ),
+          );
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,18 +192,31 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               },
                               child: Column(
                                 children: [
-                                  Text(
-                                    'SIGNUP',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: isSignupScreen
-                                            ? Palette.activeColor
-                                            : Palette.textColor1),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'SIGNUP',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: isSignupScreen
+                                                ? Palette.activeColor
+                                                : Palette.textColor1),
+                                      ),
+                                      SizedBox(
+                                        width: 15,
+                                      ),
+                                      GestureDetector(
+                                          onTap: (){
+                                            showAlert(context);
+                                          },
+                                          child: Icon(Icons.image, color: isSignupScreen ? Colors.cyan : Colors.grey[300],)
+                                      )
+                                    ],
                                   ),
                                   if (isSignupScreen)
                                     Container(
-                                      margin: EdgeInsets.only(top: 3),
+                                      margin: EdgeInsets.fromLTRB(0,3,35,0),
                                       height: 2,
                                       width: 55,
                                       color: Colors.orange,
