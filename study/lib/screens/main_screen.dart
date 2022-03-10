@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:study/add_image/add_image.dart';
 import 'package:study/config/palette.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study/screens/chat_screen.dart';
@@ -35,32 +36,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
         builder: (context){
           return Dialog(
             backgroundColor: Colors.white,
-            child: Container(
-              padding: EdgeInsets.only(top: 10),
-              width: 150,
-              height: 300,
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Colors.blue,
-                  ),
-                  SizedBox(height: 10,),
-                  OutlinedButton.icon(onPressed: (){},
-                      icon: Icon(Icons.image),
-                      label: Text('Add icon'),
-                  ),
-                  SizedBox(height: 80,),
-                  TextButton.icon(
-                      onPressed: (){
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(Icons.close),
-                      label: Text('Close')
-                  )
-                ],
-              ),
-            ),
+            child: AddImage()
           );
         }
     );
